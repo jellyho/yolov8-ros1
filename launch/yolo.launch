@@ -8,7 +8,7 @@
 	<node pkg="yolov8" type="yolo.py" name="yolo_node" required="true" output="screen" >
         <param name="image" type="string" value="$(arg image)"/>
         <param name="verbose" type="bool" value="$(arg verbose)"/>
-        <param name="publish" type="bool" value="$(arg publish_image)"/>
+        <param name="publish" type="bool" value="$(arg publish)"/>
         <param name="weights" type="string" value="$(arg weights)"/>
     </node>
 </launch>

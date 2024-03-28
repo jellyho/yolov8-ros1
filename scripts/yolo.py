@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 
 import rospy, rospkg
-import cv2, torch
+import cv2
 from std_msgs.msg import String
 from sensor_msgs.msg import Image
-from cv_bridge import CvBridge
+from cv_bridge import CvBridge, CvBridgeError
 from ultralytics import YOLO
 
 rospack = rospkg.RosPack()
@@ -59,7 +59,7 @@ def image_subscriber_node():
 
             if publish:
                 bridge = CvBridge()
-                publisher.publish(bridge.cv2_to_imgmsg(plotted, encoding="bgr8"))
+                publisher.publish(bridge.cv2_to_imgmsg(plotted, encoding="rgb8"))
 
 if __name__ == '__main__':
     try:
