@@ -30,7 +30,7 @@ def image_subscriber_node():
         weightPath = 'yolov8s.pt'
     else:
         weightPath = rospack.get_path('yolov8') + f'/src/{weights}'
-    model = YOLO(weightPath)
+    model = YOLO(weightPath, verbose=False)
 
     topic = rospy.get_param('~image')
     rospy.Subscriber(topic, Image, image_subscriber)
@@ -44,7 +44,7 @@ def image_subscriber_node():
     while not rospy.is_shutdown():
         if latest_image is not None:
             frame = latest_image
-            results = model(frame)[0]
+            results = model.predict(source=frame, verbose=False)[0]
             
             plotted = results.plot()
 
