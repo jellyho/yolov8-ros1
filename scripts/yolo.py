@@ -15,7 +15,7 @@ def image_subscriber(image_msg):
     bridge = CvBridge()
 
     try:
-        frame = bridge.imgmsg_to_cv2(image_msg, desired_encoding="rgb8")
+        frame = bridge.imgmsg_to_cv2(image_msg, desired_encoding="bgr8")
         global latest_image
         latest_image = frame
 
