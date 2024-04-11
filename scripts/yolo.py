@@ -36,10 +36,11 @@ def image_subscriber_node():
     rospy.Subscriber(topic, Image, image_subscriber)
     verbose = rospy.get_param('~verbose')
     publish = rospy.get_param('~publish')
-    json_publisher = rospy.Publisher('/yolo_results', String, queue_size=1)
+    name = rospy.get_param('~name')
+    json_publisher = rospy.Publisher(f'/{name}/yolo_results', String, queue_size=1)
 
     if publish:
-        publisher = rospy.Publisher('/yolo_image', Image, queue_size=1)
+        publisher = rospy.Publisher(f'/{name}/yolo_image', Image, queue_size=1)
 
     while not rospy.is_shutdown():
         if latest_image is not None:

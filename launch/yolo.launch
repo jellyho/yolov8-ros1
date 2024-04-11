@@ -4,11 +4,13 @@
     <arg name="verbose" default="false"/>
     <arg name="publish" default="true" />
     <arg name="weights" default="None" />
+    <arg name="name" default="node"/>
 
-	<node pkg="yolov8" type="yolo.py" name="yolo_node" required="true" output="screen" >
+	<node pkg="yolov8" type="yolo.py" name="yolo_$(arg name)" required="true" output="screen" >
         <param name="image" type="string" value="$(arg image)"/>
         <param name="verbose" type="bool" value="$(arg verbose)"/>
         <param name="publish" type="bool" value="$(arg publish)"/>
         <param name="weights" type="string" value="$(arg weights)"/>
+        <param name="name" type="string" value="$(arg name)"/>
     </node>
 </launch>
