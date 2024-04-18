@@ -15,7 +15,7 @@ def image_subscriber(image_msg):
     bridge = CvBridge()
 
     try:
-        frame = bridge.imgmsg_to_cv2(image_msg, desired_encoding="bgr8")
+        frame = bridge.imgmsg_to_cv2(image_msg, desired_encoding="rgb8")
         global latest_image
         latest_image = frame
 
@@ -46,18 +46,16 @@ def image_subscriber_node():
         if latest_image is not None:
             frame = latest_image
             results = model.predict(source=frame, verbose=False)[0]
-            
-            plotted = results.plot()
-
             try:
                 json_publisher.publish(String(results.tojson()))
             except:
                 pass
 
+            if verbose or publish:
+                plotted = results.plot()
             if verbose:
                 cv2.imshow("Received Image", plotted)
                 cv2.waitKey(1)
-
             if publish:
                 bridge = CvBridge()
                 publisher.publish(bridge.cv2_to_imgmsg(plotted, encoding="rgb8"))
